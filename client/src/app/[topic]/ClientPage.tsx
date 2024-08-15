@@ -19,7 +19,7 @@ interface ClientPageProps {
   initialData: { text: string; value: number }[];
 }
 
-const COLORS = ["#fb923c", "#fbbf24", "#f59e0b"];
+const COLORS = ["#fcd34d", "#fbbf24", "#eab308"];
 
 const ClientPage = ({ topicName, initialData }: ClientPageProps) => {
   const [words, setWords] = useState(initialData);
@@ -51,16 +51,16 @@ const ClientPage = ({ topicName, initialData }: ClientPageProps) => {
               { text: before!.text, value: before!.value + newWord.value },
             ];
           });
-        } else if(words.length < 40) {
+        } else if (words.length < 40) {
           // add to state
-          setWords((prev) => [...prev, newWord])
+          setWords((prev) => [...prev, newWord]);
         }
       });
     });
 
     return () => {
-      socket.off("room-update")
-    }
+      socket.off("room-update");
+    };
   }, [words]);
 
   const fontScale = scaleLog({
@@ -79,10 +79,10 @@ const ClientPage = ({ topicName, initialData }: ClientPageProps) => {
     <div className="w-full flex flex-col items-center justify-center min-h-screen bg-grid-zinc-50 pb-20">
       <MaxWidthWrapper className="flex flex-col items-center gap-6 pt-20">
         <h1 className="text-4xl sm:text-5xl font-bold text-center tracking-tight text-balance">
-          Enter what you think about{" "}
-          <span className="text-blue-600">{topicName}</span>:
+          What are your thoughts on{" "}
+          <span className="text-yellow-500">{topicName}</span>:
         </h1>
-        <p className="text-sm">(updated in real-time)</p>
+        <p className="text-sm text-gray-500">Thoughts updated in real-time. One word answers usually work best...</p>
 
         <div className="aspect-square max-w-xl flex items-center justitfy-center">
           <Wordcloud
@@ -114,9 +114,9 @@ const ClientPage = ({ topicName, initialData }: ClientPageProps) => {
         </div>
 
         <div className="max-w-lg w-full">
-          <Label className="font-semibold tracking-tight text-lg pb-2">
-            Here's what I think about {topicName}
-          </Label>
+        {/*   <Label className="font-semibold tracking-tight text-lg pb-2">
+            What are your thoughts on {topicName}
+          </Label> */}
           <div className="mt-1 flex gap-2 items-center">
             <Input
               value={input}
